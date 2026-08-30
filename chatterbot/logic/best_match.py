@@ -28,6 +28,7 @@ class BestMatch(LogicAdapter):
         # Get all statements that have a response text similar to the input statement
         search_results = self.search_algorithm.search(input_statement)
 
+
         # Use the input statement as the closest match if no other results are found
         input_statement.confidence = 0  # Use 0 confidence when no other results are found
         closest_match = input_statement
@@ -35,6 +36,8 @@ class BestMatch(LogicAdapter):
         # Search for the closest match to the input statement
         for result in search_results:
             closest_match = result
+            # print("SELECTED MATCH:", closest_match.text)
+            # print("SELECTED RESPONSE:", closest_match.in_response_to)
 
             # Stop searching if a match that is close enough is found
             if result.confidence >= self.maximum_similarity_threshold:
@@ -107,7 +110,11 @@ class BestMatch(LogicAdapter):
 
             # Get all statements with text similar to the closest match
             response_list = list(self.chatbot.storage.filter(**response_selection_parameters))
+            # print("\nCLOSEST MATCH:", closest_match.text)
 
+            # print("RESPONSES FOUND:")
+            # for response_item in response_list:
+            #     print("RESPONSE:", response_item.text)
             if response_list:
                 response = self.select_response(
                     input_statement,

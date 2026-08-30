@@ -128,7 +128,6 @@ class ChatBot(object):
             text_search_algorithm.name: text_search_algorithm,
             semantic_vector_search_algorithm.name: semantic_vector_search_algorithm
         }
-
         # Check if storage adapter has a preferred search algorithm
         preferred_search_algorithm = self.storage.get_preferred_search_algorithm()
         if preferred_search_algorithm and preferred_search_algorithm in self.search_algorithms:
